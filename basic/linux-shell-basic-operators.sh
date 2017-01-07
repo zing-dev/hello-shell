@@ -35,7 +35,7 @@ echo "b / a : $val"
 val=`expr $b % $a`
 echo "b % a : $val"
 
-if [ $a == $b ]
+if [[ $a == $b ]]
 then
     echo "a == b"
 fi
@@ -136,6 +136,7 @@ then
     echo "[ $a -lt 100 && $b -gt 100 ] return true"
 else
     echo "[ $a -lt 100 && $b -gt 100 ] return false"
+    echo "wocao"
 fi
 
 if [[ $a -lt 100 || $b -gt 100 ]]
@@ -261,3 +262,13 @@ then
 else
     echo "file not exists"
 fi
+
+
+if true; then
+    if true; then
+        echo "wocao"
+    else
+        echo "false"
+    fi
+fi
+
