@@ -9,3 +9,22 @@ echo $arr
 echo ${arr[0]}
 echo ${arr[1]}
 echo ${arr[2]}
+
+
+arr=("zing" "hly" 22 21)
+echo ${arr[@]}
+echo ${arr[*]}
+
+for i in ${arr[*]};do
+    echo $i
+done
+
+for i in ${arr[@]};do
+    echo $i
+done
+
+echo "length :" ${#arr}
+echo ${arr[0]}
+echo "${arr[1]}"
+
+
