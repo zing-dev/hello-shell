@@ -29,6 +29,16 @@ else
     echo "---------"
 fi
 
+num1=$[2*3]
+num2=$[1+5]
+#if [ $[num1] -eq $[num2] ]
+if test $[num1] -eq $[num2]
+then
+    echo '===========!'
+else
+    echo '!!!!!======!'
+fi
+
 
 #for 循环
 
@@ -81,7 +91,8 @@ done
 
 
 #case
-#Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。case语句格式如下：
+#Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，
+# 如果匹配成功，执行相匹配的命令。case语句格式如下：
 #case 值 in
 #模式1)
 #command1
@@ -102,14 +113,50 @@ echo 'INPUT 1 TO 4 :'
 echo 'YOU INPUT IS:'
 read aNum
 case $aNum in
-    1)  echo 'YOU CHOICE 1'
+    1) echo 'YOU CHOICE 1'
     ;;
-    2)  echo 'YOU CHOICE 2'
+    2) echo 'YOU CHOICE 2'
     ;;
-    3)  echo 'YOU CHOICE 3'
+    3) echo 'YOU CHOICE 3'
     ;;
-    4)  echo 'YOU CHOICE 4'
+    4) echo 'YOU CHOICE 4'
     ;;
-    *)  echo 'YOU DO NOT INPUT 1 TO 4 '
+    *) echo 'YOU DO NOT INPUT 1 TO 4 '
     ;;
 esac
+
+
+#break命令
+#break命令允许跳出所有循环（终止执行后面的所有循环）。
+#下面的例子中，脚本进入死循环直至用户输入数字大于5。
+# 要跳出这个循环，返回到shell提示符下，需要使用break命令。
+
+while :
+do
+    echo -n "1 to 5"
+    read aNum
+    case $aNum in
+        1|2|3|4|5) echo "you input  $aNum!"
+        ;;
+        *) echo "not 1 to 5 game over"
+        break
+        ;;
+    esac
+done
+
+#continue
+#continue命令与break命令类似，
+# 只有一点差别，它不会跳出所有循环，仅仅跳出当前循环。
+while :
+do
+    echo -n "1 to 5 "
+    read aNum
+    case $aNum in
+        1|2|3|4|5) echo "you input  $aNum!"
+        ;;
+        *) echo "you input not 1 to 5"
+        continue
+        echo "game over"
+        ;;
+    esac
+done
