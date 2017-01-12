@@ -1,0 +1,42 @@
+     1	#!/usr/bin/env bash
+     2	
+     3	#cat 命令用于连接文件并打印到标准输出设备上。
+     4	
+     5	#-n 或 --number：由 1 开始对所有输出的行数编号。
+     6	#-b 或 --number-nonblank：和 -n 相似，只不过对于空白行不编号。
+     7	#-s 或 --squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行。
+     8	#-v 或 --show-nonprinting：使用 ^ 和 M- 符号，除了 LFD 和 TAB 之外。
+     9	#-E 或 --show-ends : 在每行结束处显示 $。
+    10	#-T 或 --show-tabs: 将 TAB 字符显示为 ^I。
+    11	#-e : 等价于 -vE。
+    12	#-A, --show-all：等价于 -vET。
+    13	#-e：等价于"-vE"选项；
+    14	#-t：等价于"-vT"选项；
+    15	
+    16	cat -n -v cat.sh > cat.txt
+    17	
+    18	
+    19	cat -n -A cat.sh > cat.txt
+    20	
+    21	cat -b cat.sh cat.txt >> cat
+    22	     1	#!/usr/bin/env bash^M$
+    23	     2	^M$
+    24	     3	#cat M-eM-^QM-=M-dM-;M-$M-gM-^TM-(M-dM-:M-^NM-hM-?M-^^M-fM-^NM-%M-fM-^VM-^GM-dM-;M-6M-eM-9M-6M-fM-^IM-^SM-eM-^MM-0M-eM-^HM-0M-fM- M-^GM-eM-^GM-^FM-hM->M-^SM-eM-^GM-:M-hM-.M->M-eM-$M-^GM-dM-8M-^JM-cM-^@M-^B^M$
+    25	     4	^M$
+    26	     5	#-n M-fM-^HM-^V --numberM-oM-<M-^ZM-gM-^TM-1 1 M-eM-<M-^@M-eM-'M-^KM-eM-/M-9M-fM-^IM-^@M-fM-^\M-^IM-hM->M-^SM-eM-^GM-:M-gM-^ZM-^DM-hM-!M-^LM-fM-^UM-0M-gM-<M-^VM-eM-^OM-7M-cM-^@M-^B^M$
+    27	     6	#-b M-fM-^HM-^V --number-nonblankM-oM-<M-^ZM-eM-^RM-^L -n M-gM-^[M-8M-dM-<M-<M-oM-<M-^LM-eM-^OM-*M-dM-8M-^MM-hM-?M-^GM-eM-/M-9M-dM-:M-^NM-gM-)M-:M-gM-^YM-=M-hM-!M-^LM-dM-8M-^MM-gM-<M-^VM-eM-^OM-7M-cM-^@M-^B^M$
+    28	     7	#-s M-fM-^HM-^V --squeeze-blankM-oM-<M-^ZM-eM-=M-^SM-iM-^AM-^GM-eM-^HM-0M-fM-^\M-^IM-hM-?M-^^M-gM-;M--M-dM-8M-$M-hM-!M-^LM-dM-;M-%M-dM-8M-^JM-gM-^ZM-^DM-gM-)M-:M-gM-^YM-=M-hM-!M-^LM-oM-<M-^LM-eM-0M-1M-dM-;M-#M-fM-^MM-"M-dM-8M-:M-dM-8M-^@M-hM-!M-^LM-gM-^ZM-^DM-gM-)M-:M-gM-^YM-=M-hM-!M-^LM-cM-^@M-^B^M$
+    29	     8	#-v M-fM-^HM-^V --show-nonprintingM-oM-<M-^ZM-dM-=M-?M-gM-^TM-( ^ M-eM-^RM-^L M- M-gM-,M-&M-eM-^OM-7M-oM-<M-^LM-iM-^YM-$M-dM-:M-^F LFD M-eM-^RM-^L TAB M-dM-9M-^KM-eM-$M-^VM-cM-^@M-^B^M$
+    30	     9	#-E M-fM-^HM-^V --show-ends : M-eM-^\M-(M-fM-/M-^OM-hM-!M-^LM-gM-;M-^SM-fM-^]M-^_M-eM-$M-^DM-fM-^XM->M-gM-$M-: $M-cM-^@M-^B^M$
+    31	    10	#-T M-fM-^HM-^V --show-tabs: M-eM-0M-^F TAB M-eM--M-^WM-gM-,M-&M-fM-^XM->M-gM-$M-:M-dM-8M-: ^IM-cM-^@M-^B^M$
+    32	    11	#-e : M-gM--M-^IM-dM-;M-7M-dM-:M-^N -vEM-cM-^@M-^B^M$
+    33	    12	#-A, --show-allM-oM-<M-^ZM-gM--M-^IM-dM-;M-7M-dM-:M-^N -vETM-cM-^@M-^B^M$
+    34	    13	#-eM-oM-<M-^ZM-gM--M-^IM-dM-;M-7M-dM-:M-^N"-vE"M-iM-^@M-^IM-iM-!M-9M-oM-<M-^[^M$
+    35	    14	#-tM-oM-<M-^ZM-gM--M-^IM-dM-;M-7M-dM-:M-^N"-vT"M-iM-^@M-^IM-iM-!M-9M-oM-<M-^[^M$
+    36	    15	^M$
+    37	    16	cat -n -v cat.sh > cat.txt^M$
+    38	    17	^M$
+    39	    18	^M$
+    40	    19	cat -n -A cat.sh > cat.txt^M$
+    41	    20	^M$
+    42	    21	cat -b cat.sh cat.txt >> cat^M$
