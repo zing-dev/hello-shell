@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#http://awk.readthedocs.io/en/latest/chapter-one.html#id1
+
 
 # NF NF, 字段数量
 # NR 行数
@@ -40,3 +42,9 @@ awk '$2 < 3.95   { print $0, "rate is below minimum wage" }' $1
 awk '$2 > 10     { print $0, "rate exceeds $10 per hour" }' $1
 awk '$3 < 0      { print $0, "negative hours worked" }' $1
 awk '$3 > 60     { print $0, "too many hours worked" }' $1
+echo -e "**********************************************"
+
+#特殊模式 BEGIN 用于匹配第一个输入文件的第一行之前的位置，
+#END 则用于匹配处理过的最后一个文件的最后一行之后的位置。这个程序使用 BEGIN 来输出一个标题：:
+#BEGIN与END
+awk 'BEGIN { print "Name    RATE    HOURS"} {print} END { print "********************************************"} '  $1
