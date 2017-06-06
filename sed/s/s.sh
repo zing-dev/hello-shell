@@ -20,6 +20,7 @@ echo -e "****************************************************************"
 #如果flags中包含g，则表示全局匹配：
 echo -e "column1 column2 column3 column4" | sed 's/ /;/g'
 echo -e "column1 column2 column3 column4" | sed 's/ /-/g'
+echo -e "sksksksksksk" | sed 's/sk/SK/3g'
 
 echo -e "****************************************************************"
 #如果flags中明确指定替换第n次的匹配，例如n=2：
@@ -34,3 +35,4 @@ echo -e "testtest  text" | sed 's]test]TEXT]g'
 which php
 which php | sed 's/\/bin/\/usr\/local\/bin/g'
 
+echo -e "testtest  text" | sed 's]test]TEXT]g'
