@@ -1,0 +1,83 @@
+
+CUT(1)                    BSD General Commands Manual                   CUT(1)
+
+NNAAMMEE
+     ccuutt -- cut out selected portions of each line of a file
+
+SSYYNNOOPPSSIISS
+     ccuutt --bb _l_i_s_t [--nn] [_f_i_l_e _._._.]
+     ccuutt --cc _l_i_s_t [_f_i_l_e _._._.]
+     ccuutt --ff _l_i_s_t [--dd _d_e_l_i_m] [--ss] [_f_i_l_e _._._.]
+
+DDEESSCCRRIIPPTTIIOONN
+     The ccuutt utility cuts out selected portions of each line (as specified by
+     _l_i_s_t) from each _f_i_l_e and writes them to the standard output.  If no _f_i_l_e
+     arguments are specified, or a file argument is a single dash (`--'), ccuutt
+     reads from the standard input.  The items specified by _l_i_s_t can be in
+     terms of column position or in terms of fields delimited by a special
+     character.  Column numbering starts from 1.
+
+     The _l_i_s_t option argument is a comma or whitespace separated set of num-
+     bers and/or number ranges.  Number ranges consist of a number, a dash
+     (`-'), and a second number and select the fields or columns from the
+     first number to the second, inclusive.  Numbers or number ranges may be
+     preceded by a dash, which selects all fields or columns from 1 to the
+     last number.  Numbers or number ranges may be followed by a dash, which
+     selects all fields or columns from the last number to the end of the
+     line.  Numbers and number ranges may be repeated, overlapping, and in any
+     order.  If a field or column is specified multiple times, it will appear
+     only once in the output.  It is not an error to select fields or columns
+     not present in the input line.
+
+     The options are as follows:
+
+     --bb _l_i_s_t
+             The _l_i_s_t specifies byte positions.
+
+     --cc _l_i_s_t
+             The _l_i_s_t specifies character positions.
+
+     --dd _d_e_l_i_m
+             Use _d_e_l_i_m as the field delimiter character instead of the tab
+             character.
+
+     --ff _l_i_s_t
+             The _l_i_s_t specifies fields, separated in the input by the field
+             delimiter character (see the --dd option.)  Output fields are sepa-
+             rated by a single occurrence of the field delimiter character.
+
+     --nn      Do not split multi-byte characters.  Characters will only be out-
+             put if at least one byte is selected, and, after a prefix of zero
+             or more unselected bytes, the rest of the bytes that form the
+             character are selected.
+
+     --ss      Suppress lines with no field delimiter characters.  Unless speci-
+             fied, lines with no delimiters are passed through unmodified.
+
+EENNVVIIRROONNMMEENNTT
+     The LANG, LC_ALL and LC_CTYPE environment variables affect the execution
+     of ccuutt as described in environ(7).
+
+EEXXIITT SSTTAATTUUSS
+     The ccuutt utility exits 0 on success, and >0 if an error occurs.
+
+EEXXAAMMPPLLEESS
+     Extract users' login names and shells from the system passwd(5) file as
+     ``name:shell'' pairs:
+
+           cut -d : -f 1,7 /etc/passwd
+
+     Show the names and login times of the currently logged in users:
+
+           who | cut -c 1-16,26-38
+
+SSEEEE AALLSSOO
+     colrm(1), paste(1)
+
+SSTTAANNDDAARRDDSS
+     The ccuutt utility conforms to IEEE Std 1003.2-1992 (``POSIX.2'').
+
+HHIISSTTOORRYY
+     A ccuutt command appeared in AT&T System III UNIX.
+
+BSD                            December 21, 2006                           BSD
