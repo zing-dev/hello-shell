@@ -2,15 +2,16 @@
 
 ### Accept
 - 告诉WEB服务器自己接受什么介质类型，*/* 表示任何类型，type/* 表示该类型下的所有子类型，type/sub-type。
-- `Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-`    
+- `Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8`
+
 ### Accept-Charset
 ##### 浏览器申明自己接收的字符集
-- Accept-Encoding：浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法 （gzip，deflate）
--      Accept-Encoding:gzip, deflate
-- Accept-Language：浏览器申明自己接收的语言语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等。
-- `Accept-Language:zh-CN,zh;q=0.8
-`
+- Accept-Encoding: 浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法 （gzip，deflate）
+-      Accept-Encoding: gzip, deflate
+- Accept-Language: 浏览器申明自己接收的语言语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等。
+- `Accept-Language:zh-CN,zh;q=0.8`
+
+
 ### Accept-Ranges
 - WEB服务器表明自己是否接受获取其某个实体的一部分（比如文件的一部分）的请求。bytes：表示接受，none：表示不接受。
 
@@ -26,16 +27,16 @@
 - max-age：（只接受 Age 值小于 max-age 值，并且没有过期的对象）
 - max-stale：（可以接受过去的对象，但是过期时间必须小于max-stale 值）
 - min-fresh：（接受其新鲜生命期大于其当前 Age 跟 min-fresh 值之和的缓存对象）
-- `Cache-Control:no-cache
-`
+- `Cache-Control:no-cache`
+
 ####　响应
 - public(可以用 Cached 内容回应任何用户)
 - private（只能用缓存内容回应先前请求该内容的那个用户）
 - no-cache（可以缓存，但是只有在跟WEB服务器验证了其有效后，才能返回给客户端）
 - max-age：（本响应包含的对象的过期时间）
 - ALL: no-store（不允许缓存）
-- `Cache-Control:private, max-age=10
-`
+- `Cache-Control:private, max-age=10`
+
 ### Connection
 #### 请求
 - close（告诉WEB服务器或者代理服务器，在完成本次请求的响应后，断开连接，不要等待本次连接的后续请求了）。
@@ -108,16 +109,15 @@
 
 ### User-Agent
 - 浏览器表明自己的身份（是哪种浏览器）。
-- `user-agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
-`
+- `user-agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36`
+
 ### Transfer-Encoding
 - WEB 服务器表明自己对本响应消息体（不是消息体里面的对象）作了怎样的编码，比如是否分块（chunked）。
-- `Transfer-Encoding: chunked
-`
+- `Transfer-Encoding: chunked`
+
 ### Vary
 - WEB服务器用该头部的内容告诉 Cache 服务器，在什么条件下才能用本响应所返回的对象响应后续的请求。假如源WEB服务器在接到第一个请求消息时，其响应消息的头部为：Content-Encoding: gzip; Vary: Content-Encoding 那么 Cache 服务器会分析后续请求消息的头部，检查其 Accept-Encoding，是否跟先前响应的 Vary 头部值一致，即是否使用相同的内容编码方法，这样就可以防止 Cache 服务器用自己Cache 里面压缩后的实体响应给不具备解压能力的浏览器。
-- `vary:Accept-Encoding
-`
+- `vary:Accept-Encoding`
 
 # HTTP消息头部实例
 ```
