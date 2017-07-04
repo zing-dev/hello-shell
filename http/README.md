@@ -2,15 +2,15 @@
 
 ### Accept
 - 告诉WEB服务器自己接受什么介质类型，*/* 表示任何类型，type/* 表示该类型下的所有子类型，type/sub-type。
--     Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-    
+- `Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+`    
 ### Accept-Charset
 ##### 浏览器申明自己接收的字符集
 - Accept-Encoding：浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法 （gzip，deflate）
 -      Accept-Encoding:gzip, deflate
 - Accept-Language：浏览器申明自己接收的语言语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等。
--      Accept-Language:zh-CN,zh;q=0.8
-
+- `Accept-Language:zh-CN,zh;q=0.8
+`
 ### Accept-Ranges
 - WEB服务器表明自己是否接受获取其某个实体的一部分（比如文件的一部分）的请求。bytes：表示接受，none：表示不接受。
 
@@ -26,15 +26,16 @@
 - max-age：（只接受 Age 值小于 max-age 值，并且没有过期的对象）
 - max-stale：（可以接受过去的对象，但是过期时间必须小于max-stale 值）
 - min-fresh：（接受其新鲜生命期大于其当前 Age 跟 min-fresh 值之和的缓存对象）
--     Cache-Control:no-cache
+- `Cache-Control:no-cache
+`
 ####　响应
 - public(可以用 Cached 内容回应任何用户)
 - private（只能用缓存内容回应先前请求该内容的那个用户）
 - no-cache（可以缓存，但是只有在跟WEB服务器验证了其有效后，才能返回给客户端）
 - max-age：（本响应包含的对象的过期时间）
 - ALL: no-store（不允许缓存）
--     Cache-Control:private, max-age=10
-
+- `Cache-Control:private, max-age=10
+`
 ### Connection
 #### 请求
 - close（告诉WEB服务器或者代理服务器，在完成本次请求的响应后，断开连接，不要等待本次连接的后续请求了）。
@@ -46,12 +47,12 @@
 
 ### Content-XXXXX
 - Content-Encoding:WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。
--     Content-Encoding：gzip
+- `Content-Encoding：gzip`
 - Content-Language：WEB 服务器告诉浏览器自己响应的对象的语言。
 - Content-Length： WEB 服务器告诉浏览器自己响应的对象的长度。
 - Content-Range： WEB 服务器表明该响应包含的部分对象为整个对象的哪个部分。
 - Content-Type： WEB 服务器告诉浏览器自己响应的对象的类型。
--     text/html; charset=utf-8
+- `text/html; charset=utf-8`
 
 ### ETag
 - 就是一个对象（比如URL）的标志值，就一个对象而言，比如一个 html 文件，如果被修改了，其 Etag 也会别修改，所以，ETag 的作用跟 Last-Modified 的作用差不多，主要供 WEB 服务器判断一个对象是否改变了。比如前一次请求某个 html 文件时，获得了其 ETag，当这次又请求这个文件时，浏览器就会把先前获得的 ETag 值发送给 WEB 服务器，然后 WEB 服务器会把这个 ETag 跟该文件的当前 ETag 进行对比，然后就知道这个文件有没有改变了。
@@ -96,29 +97,30 @@
 
 ### Range
 - 浏览器（比如 Flashget 多线程下载时）告诉 WEB 服务器自己想取对象的哪部分。
--     Range: bytes=1173546-
+- `Range: bytes=1173546-`
 
 ### Referer
 - 浏览器向 WEB 服务器表明自己是从哪个网页/URL 获得/点击当前请求中的网址/URL。
 
 ###  Server
 - WEB 服务器表明自己是什么软件及版本等信息。
--     server:Coding Pages
+- `server:Coding Pages`
 
 ### User-Agent
 - 浏览器表明自己的身份（是哪种浏览器）。
--     user-agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
-
+- `user-agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+`
 ### Transfer-Encoding
 - WEB 服务器表明自己对本响应消息体（不是消息体里面的对象）作了怎样的编码，比如是否分块（chunked）。
--     Transfer-Encoding: chunked
-
+- `Transfer-Encoding: chunked
+`
 ### Vary
 - WEB服务器用该头部的内容告诉 Cache 服务器，在什么条件下才能用本响应所返回的对象响应后续的请求。假如源WEB服务器在接到第一个请求消息时，其响应消息的头部为：Content-Encoding: gzip; Vary: Content-Encoding 那么 Cache 服务器会分析后续请求消息的头部，检查其 Accept-Encoding，是否跟先前响应的 Vary 头部值一致，即是否使用相同的内容编码方法，这样就可以防止 Cache 服务器用自己Cache 里面压缩后的实体响应给不具备解压能力的浏览器。
--     vary:Accept-Encoding
+- `vary:Accept-Encoding
+`
 
 # HTTP消息头部实例
-```ini
+```
 Request URL:https://zhangrxiang.coding.me/
 Request Method:GET
 Status Code:200 
@@ -136,10 +138,10 @@ server:Coding Pages
 status:200
 vary:Accept-Encoding
 Request Headers
-\:authority:zhangrxiang.coding.me
-\:method:GET
-\:path:/
-\:scheme:https
+:authority:zhangrxiang.coding.me
+:method:GET
+:path:/
+:scheme:https
 accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
 accept-encoding:gzip, deflate, br
 accept-language:zh-CN,zh;q=0.8
@@ -208,6 +210,7 @@ user-agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, l
 2. 请求头标：允许客户端传递关于自身的信息和希望的响应形式。
 3. 响应头标：服务器和于传递自身信息的响应。
 4. 实体头标：定义被传送资源的信息。即可用于请求，也可用于响应。
+
 - 头标格式：<name>:<value><CRLF>
 - Accept 定义客户端可以处理的媒体类型，按优先级排序；在一个以逗号为分隔的列表中，可以定义多种类型和使用通配符。例如：Accept: image/jpeg,image/png,*/*Accept-Charset 定义客户端可以处理的字符集，按优先级排序；在一个以逗号为分隔的列表中，可以定义多种类型和使用通配符。例如：Accept-Charset: iso-8859-1,*,utf-8
 - Accept-Encoding 定义客户端可以理解的编码机制。例如：Accept-Encoding:gzip,compress
