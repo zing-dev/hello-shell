@@ -3,6 +3,9 @@
 
 ## HTTP请求报文
 - 一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成。
+
+![image](../images/2012072810301161.png)
+
 ```
 <request-line>
 <headers>
@@ -10,7 +13,6 @@
 [<request-body>]
 ```
 
-![image](../images/2012072810301161.png)
 
 ### 请求头
 - 请求行由请求方法字段、URL字段和HTTP协议版本字段3个字段组成，它们用空格分隔。例如，GET /index.html HTTP/1.1。
