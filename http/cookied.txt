@@ -1,0 +1,18 @@
+HTTP/1.1 200 OK
+Server: Nginx
+Date: Tue, 04 Jul 2017 06:57:40 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 25980
+Vary: Accept-Encoding
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Fri, 30 Jun 2017 11:30:10 GMT
+ETag: W/"657c-15cf8c3f512"
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-Xss-Protection: 1; mode=block
+Strict-Transport-Security: max-age=10886400; includeSubDomains; preload
+Set-Cookie: c=coding-cli%3Dfalse%2Ccoding-owas%3Dtrue%2Cqc-v2%3Dtrue%2Ctask-comment%3Dfalse%2Ctask-history%3Dtrue%2Cvip%3Dtrue%2Czip-download%3Dtrue%2C5c0c0757;Path=/;Max-Age=259200
+Set-Cookie: exp=89cd78c2;Path=/;Max-Age=2592000
+Set-Cookie: frontlog_sample_rate=1;Path=/;Max-Age=2592000
+
