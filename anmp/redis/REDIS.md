@@ -1,13 +1,13 @@
-# Redis详解入门篇
+# Redis
 
 ## 【redis数据结构 – 简介】
 - redis是一种高级的key:value存储系统，其中value支持五种数据类型：
 ```
-    1.字符串（strings）
-    2.字符串列表（lists）
-    3.字符串集合（sets）
-    4.有序字符串集合（sorted sets）
-    5.哈希（hashes）
+    1.字符串（string）
+    2.字符串列表（list）
+    3.字符串集合（set）
+    4.有序字符串集合（sorted set）
+    5.哈希（hashe）
 ```
 1. key不要太长，尽量不要超过1024字节，这不仅消耗内存，而且会降低查找的效率；
 2. key也不要太短，太短的话，key的可读性会降低；
@@ -24,6 +24,7 @@
 
 #### `setnx key value`
 - 同上，如果key已经存在，返回0 。nx 是not exist的意思
+
 #### `get key`
 - 获取key对应的string值,如果key不存在返回nil
 
@@ -68,6 +69,7 @@
 
 #### `rpush key string`
 - 同上，在尾部添加
+
 #### `llen key`
 - 返回`key`对应`list`的长度，`key`不存在返回0,如果`key`对应类型不是`list`返回错误
 
@@ -88,6 +90,7 @@
 
 #### `rpop`
 - 同上，但是从尾部删除
+
 #### `blpop key1...keyN timeout`
 - 从左到右扫描返回对第一个非空`list`进行`lpop`操作并返回，比如`blpop list1 list2 list3 0 `,如果`list`不存在，`list2,list3`都是非空则对`list2`做`lpop`并返回从`list2`中删除的元素。如果所有的`list`都是空或不存在，则会阻塞`timeout`秒，`timeout`为0表示一直阻塞。当阻塞时，如果有`client`对`key1...keyN`中的任意`key`进行`push`操作，则第一在这个`key`上被阻塞的`client`会立即返回。如果超时发生，则返回`nil`。
 
@@ -104,3 +107,4 @@
 ## 【redis数据结构 – 哈希】
    
 
+[from](http://www.cnblogs.com/yuhangwang/p/5817930.html)
