@@ -100,9 +100,71 @@
 #### `rpoplpush srckey destkey`
 - 从`srckey`对应`list`的尾部移除元素并添加到`destkey`对应`list`的头部,最后返回被移除的元素值，整个操作是原子的.如果`srckey`是空或者不存在返回`nil`
 
-## 【redis数据结构 – 集合】
+## 【redis数据结构 – `Set`集合】
+- `redis`的`set`是`string`类型的无序集合。
+- `set`元素最大可以包含(`2的32次方-1`)个元素。
+- `set`的是通过`hash table`实现的，`hash table`会随着添加或者删除自动的调整大小
+- 关于`set`集合类型除了基本的添加删除操作，其他有用的操作还包含集合的取并集(`union`)，交集(`intersection`)，差集(`difference`)。通过这些操作可以很容易的实现`sns`中的好友推荐和`blog`的`tag`功能。
 
-## 【redis数据结构 – 有序集合】
+#### `sadd key member` 
+- 添加一个`string`元素到,`key`对应的`set`集合中，成功返回1,如果元素以及在集合中返回0,`key`对应的`set`不存在返回错误
+#### `srem key member`
+- 从`key`对应`set`中移除给定元素，成功返回1，如果`member`在集合中不存在或者`key`不存在返回0，如果`key`对应的不是`set`类型的值返回错误
+#### `spop key` 
+- 删除并返回`key`对应`set`中随机的一个元素,如果`set`是空或者`key`不存在返回`nil`
+#### `srandmember key`
+- 同`spop`，随机取`set`中的一个元素，但是不删除元素
+#### `smove srckey dstkey member`
+- 从`srckey`对应`set`中移除`member`并添加到`dstkey`对应`set`中，整个操作是原子的。成功返回1,如果`member`在`srckey`中不存在返回0，如果`key`不是`set`类型返回错误
+#### `scard key`
+- 返回`set`的元素个数，如果`set`是空或者`key`不存在返回0
+#### `sismember key member` 
+- 判断member是否在set中，存在返回1，0表示不存在或者key不存在
+#### `sinter key1 key2...keyN`
+- 返回所有给定key的交集
+#### `sinterstore dstkey key1...keyN`
+- 同`sinter`，但是会同时将交集存到`dstkey`下
+#### `sunion key1 key2...keyN`
+- 返回所有给定`key`的并集
+#### `sunionstore dstkey key1...keyN`
+- 同`sunion`，并同时保存并集到`dstkey`下
+#### `sdiff key1 key2...keyN` 
+- 返回所有给定key的差集
+#### `sdiffstore dstkey key1...keyN` 
+- 同`sdiff`，并同时保存差集到`dstkey`下
+#### `smembers key` 
+- 返回key对应set的所有元素，结果是无序的
+
+## 【redis数据结构 – `Sorted Set` 有序集合】
+- 和set一样`sorted set`也是`string`类型元素的集合，不同的是每个元素都会关联一个`double`类型的`score`。`sorted set`的实现是`skip list`和`hash table`的混合体。
+- 当元素被添加到集合中时，一个元素到`score`的映射被添加到`hash table`中，另一个`score`到元素的映射被添加到`skip list`并按照`score`排序，所以就可以有序的获取集合中的元素。
+
+#### `zadd key score member` 
+- 添加元素到集合，元素在集合中存在则更新对应`score`
+#### `zrem key member` 
+- 删除指定元素，1表示成功，如果元素不存在返回0
+#### `zincrby key incr member` 
+- 增加对应`member`的`score`值，然后移动元素并保持`skip list`有序。返回更新后的`score`值
+#### `zrank key member` 
+- 返回指定元素在集合中的排名（下标，非`score`）,集合中元素是按`score`从小到大排序的
+#### `zrevrank key member` 
+- 同上,但是集合中元素是按`score`从大到小排序
+#### `zrange key start end` 
+- 类似`lrange`操作从集合中取指定区间的元素。返回的是有序结果
+#### `zrevrange key start end` 
+- 同上，返回结果是按`score`逆序的
+#### `zrangebyscore key min max` 
+- 返回集合中`score`在给定区间的元素
+#### `zcount key min max` 
+- 返回集合中`score`在给定区间的数量
+#### `zcard key` 
+- 返回集合中元素个数
+#### `zscore key element`  
+- 返回给定元素对应的`score`
+#### `zremrangebyrank key min max `
+- 删除集合中排名在给定区间的元素
+#### `zremrangebyscore key min max`
+- 删除集合中`score`在给定区间的元素
 
 ## 【redis数据结构 – 哈希】
    
