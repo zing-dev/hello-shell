@@ -1,0 +1,125 @@
+sockaddr结构体
+
+struct sockaddr 是一个通用地址结构，
+这是为了统一地址结构的表示方法，统一接口函数，
+使不同的地址结构可以被bind() , connect() 
+等函数调用；sa_data把目标地址和端口信息混在一起了
+
+struct sockaddr {  
+     unsigned short sa_family;
+　　 char sa_data[14];                  
+}; 
+sa_family是通信类型，最常用的值是 "AF_INET"
+sa_data14字节，包含套接字中的目标地址和端口信息
+  
+sockaddr_in 结构体：
+
+struct sockaddr_in中的in 表示internet，就是网络地址，
+这只是我们比较常用的地址结构，属于AF_INET地址族，他非常的常用
+sockaddr_in结构体解决了sockaddr的缺陷，
+把port和addr分开储存在两个变量中
+
+struct sockaddr_in { 
+　　 short int sin_family;
+　　 unsigned short int sin_port; 
+     struct in_addr sin_addr;
+     struct in_addr { 
+             unsigned long s_addr;
+     }                 
+     unsigned char sin_zero[8];
+}   
+sin_port和sin_addr都必须是NBO
+一般可视化的数字都是HBO（本机字节顺序）
+sin_zero 初始值应该使用函数 bzero() 来全部置零。
+一般采用下面语句
+struct sockaddr_in cliaddr;
+bzero(&cliaddr,sizeof(cliaddr));
+sockaddr_in结构体变量的基本配置
+struct sockaddr_in ina;
+bzero(&ina,sizeof(ina));
+ina.sin_family=AF_INET;
+ina.sin_port=htons(23);
+ina.sin_addr.s_addr = inet_addr("132.241.5.10");  
+ockaddr 和 sockaddr_in的相互关系
+一般先把sockaddr_in变量赋值后，强制类型转换后传入用sockaddr做参数的函数
+sockaddr_in用于socket定义和赋值
+sockaddr用于函数参数
+
+最典型的源、目的节点socket定义
+对于源、目的地址和源、目的地址端口，需要建立两个socket变量
+cliaddr绑定源地址和源端口
+servaddr用于connect和sendto的设定目的地址和目的端口
+struct sockaddr_in servaddr,cliaddr;
+
+create_socket(char *server_addr_string,unsigned int server_port)
+{
+源socket赋值
+       bzero(&cliaddr,sizeof(cliaddr));
+       cliaddr.sin_family = AF_INET;
+       通常TCP/UDP 协议源地址和端口都是随机的
+       cliaddr.sin_addr.s_addr = htons(INADDR_ANY);
+       cliaddr.sin_port = htons(0);
+
+目的socket赋值
+       bzero(&servaddr,sizeof(servaddr));
+       servaddr.sin_family = AF_INET;
+       inet_aton(server_addr_string,&servaddr.sin_addr);
+       servaddr.sin_port = htons(server_port);
+}
+
+网络字节顺序 (Network Byte Order) NBO
+结构体的sin_port和sin_addr都必须是NBO
+本机字节顺序 (Host Byte Order)    HBO
+一般可视化的数字都是HBO
+NBO，HBO二者转换
+inet_addr()将字符串点数格式地址转化成无符号长整型(unsigned long s_addr s_addr)
+inet_aton()将字符串点数格式地址转化成NBO
+inet_ntoa()将NBO地址转化成字符串点数格式
+htons() "Host to Network Short"
+htonl() "Host to Network Long"
+ntohs() "Network to Host Short"
+ntohl() "Network to Host Long"
+常用的是htons(),inet_addr()正好对应结构体的端口类型和地址类型
+
+三种给socket赋值地址的方法
+inet_aton(server_addr_string,&myaddr.sin_addr);
+myaddr.sin_addr.s_addr = inet_addr("132.241.5.10")；
+INADDR_ANY转不转NBO随便
+myaddr.sin_addr.s_addr = htons(INADDR_ANY);  
+myaddr.sin_addr.s_addr = INADDR_ANY;
+
+两种给socket 赋值端口的方法
+#define MYPORT 3490 
+myaddr.sin_port = htons(MYPORT);
+0（随机端口）转不转NBO随便
+myaddr.sin_port = htons(0);
+myaddr.sin_port = 0;  
+
+htons/l和ntohs/l等数字转换都不能用于地址转换，
+因为地址都是点数格式，
+所以地址只能采用数字/字符串转换如inet_aton,inet_ntoa;
+唯一可以用于地址转换的htons是针对INADDR_ANY
+liaddr.sin_addr.s_addr = htons(INADDR_ANY)
+
+inet_addr()与inet_aton()的区别
+inet_addr()    是返回值型
+struct sockaddr_in ina;
+
+ina.sin_addr.s_addr = inet_addr("132.241.5.10"); 
+inet_aton()     是参数指针型
+struct sockaddr_in ina;
+
+inet_aton("132.241.5.10",&ina.sin_addr);
+
+inet_ntoa  将NBO地址转化成字符串点数格式
+参数：结构体变量.sinaddr
+返回值：字符串指针
+a1 = inet_ntoa(ina.sin_addr);
+printf("address 1: %s\n",a1); 
+address 1: 132.241.5.10 
+
+inet_addr()的缺陷：必须对-1做检测处理
+因为inet_addr()的结果是整型，而发生错误时返回-1。
+而 ina.sin_addr.s_addr是unsigned long型
+-1在long short显示成111111111,
+IP地址255.255.255.255相符合！会被误认为广播地址！
