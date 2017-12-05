@@ -1,0 +1,29 @@
+虽然win10自带的bash功能已经很丰富，操作也简便，不过习惯了用xshell, 还是选择用xshell来操作
+
+直接用xshell连接127.0.0.1 端口22 提示连接失败。说明应该是ubuntu的sshd服务设置有问题：
+
+解决方案如下：
+
+安装ssh
+
+apt-get install openssh-server
+技术分享
+技术分享
+备份sshd配置文件
+
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+技术分享技术分享
+修改内容：
+
+Port 23 # 端口改为23，22端口已被占用
+ListenAddress 0.0.0.0 # 取消注释
+#StrictModes yes # 注释
+PasswordAuthentication yes # 允许密码登录
+启动ssh
+
+service ssh start
+
+如果提示sshd error: could not load host key，则用下面的命令重新生成
+
+sudo rm /etc/ssh/ssh*key
+dpkg-reconfigure openssh-server
