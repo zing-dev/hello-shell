@@ -12,7 +12,8 @@
 #高亮是1，不高亮是0
 #注意m后面紧跟字符串。
 #\e[0;;m \e[0m
-echo -e '\e[0;31;1mzhangrxianglikehoulingyan\e[0m'
+echo -e '\e[0;31;1mzhangrxiang\e[0m'
 echo -e '\e[0;33;1mHello\e[0m World'   # 带颜色的玩法
 echo -e '\e[0;33;4mHello\e[0m World'   # 带颜色+下划线
 echo -e '\e[0;33;5mHello\e[0m World'   # 带颜色+闪烁
+echo -e '\e[0;33;6mHello\e[0m World'   # 带颜色+闪烁

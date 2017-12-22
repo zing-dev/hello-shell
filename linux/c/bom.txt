@@ -1,0 +1,1 @@
+sed -i '1s/^\xef\xbb\xbf//' fileName È¥µôbomÍ·
