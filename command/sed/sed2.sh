@@ -21,7 +21,9 @@ sed '' books.txt
 # 6) A Game of Thrones, George R. R. Martin, 864
 sed -e '1d' -e '2d' -e '5d' books.txt
 
-echo 1111;
+# 1) A Storm of Swords, George R. R. Martin, 1216 
+# 2) The Two Towers, J. R. R. Tolkien, 352 
+# 3) The Alchemist, Paulo Coelho, 197 
 sed -n -e '1p' -e '2p' -e '3p' books.txt
 
 echo -e "1d\n2d\n5d" > commands.txt 

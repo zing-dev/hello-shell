@@ -105,7 +105,7 @@ cat Paulo.txt
 # 4) The Fellowship of the Ring, J. R. R. Tolkien, 432 
 cat Tolkien.txt
 
-
+# 追加命令 a
 # 1) A Storm of Swords, George R. R. Martin, 1216 
 # 2) The Two Towers, J. R. R. Tolkien, 352 
 # 3) The Alchemist, Paulo Coelho, 197 
@@ -113,6 +113,7 @@ cat Tolkien.txt
 # 7) Adultry, Paulo Coelho, 234
 # 5) The Pilgrimage, Paulo Coelho, 288 
 # 6) A Game of Thrones, George R. R. Martin, 864
+# 在第四行之后追加一本新书
 sed '4 a 7) Adultry, Paulo Coelho, 234' books.txt
 
 # 1) A Storm of Swords, George R. R. Martin, 1216 
@@ -122,6 +123,7 @@ sed '4 a 7) Adultry, Paulo Coelho, 234' books.txt
 # 5) The Pilgrimage, Paulo Coelho, 288 
 # 6) A Game of Thrones, George R. R. Martin, 864
 # 7) Adultry, Paulo Coelho, 234
+# 文件的结尾插入一行文本，使用 $ 作为地址
 sed '$ a 7) Adultry, Paulo Coelho, 234' books.txt
 
 # 1) A Storm of Swords, George R. R. Martin, 1216 
@@ -131,4 +133,51 @@ sed '$ a 7) Adultry, Paulo Coelho, 234' books.txt
 # 4) The Fellowship of the Ring, J. R. R. Tolkien, 432 
 # 5) The Pilgrimage, Paulo Coelho, 288 
 # 6) A Game of Thrones, George R. R. Martin, 864
+# 在匹配 The Alchemist 的行之后追加文本
 sed '/The Alchemist/ a 7) Adultry, Paulo Coelho, 234' books.txt  
+
+# 行替换命令 c
+# 1) A Storm of Swords, George R. R. Martin, 1216 
+# 2) The Two Towers, J. R. R. Tolkien, 352 
+# 3) Adultry, Paulo Coelho, 324
+# 4) The Fellowship of the Ring, J. R. R. Tolkien, 432 
+# 5) The Pilgrimage, Paulo Coelho, 288 
+# 6) A Game of Thrones, George R. R. Martin, 864
+# 替换文本中的第三行为新的内容
+sed '3 c 3) Adultry, Paulo Coelho, 324' books.txt
+
+# 1) A Storm of Swords, George R. R. Martin, 1216 
+# 2) The Two Towers, J. R. R. Tolkien, 352 
+# 3) Adultry, Paulo Coelho, 324
+# 4) The Fellowship of the Ring, J. R. R. Tolkien, 432 
+# 5) The Pilgrimage, Paulo Coelho, 288 
+# 6) A Game of Thrones, George R. R. Martin, 864
+sed '/The Alchemist/ c 3) Adultry, Paulo Coelho, 324' books.txt
+
+# 1) A Storm of Swords, George R. R. Martin, 1216 
+# 2) The Two Towers, J. R. R. Tolkien, 352 
+# 3) The Alchemist, Paulo Coelho, 197 
+# 4) Adultry, Paulo Coelho, 324
+sed '4, 6 c 4) Adultry, Paulo Coelho, 324' books.txt  
+
+# 插入命令 i
+echo -e "------------------插入命令 i----------------------"
+# 1) A Storm of Swords, George R. R. Martin, 1216 
+# 2) The Two Towers, J. R. R. Tolkien, 352 
+# 3) The Alchemist, Paulo Coelho, 197 
+# 7) Adultry, Paulo Coelho, 324
+# 4) The Fellowship of the Ring, J. R. R. Tolkien, 432 
+# 5) The Pilgrimage, Paulo Coelho, 288 
+# 6) A Game of Thrones, George R. R. Martin, 864
+# 在第四行前插入新的一行
+sed '4 i 7) Adultry, Paulo Coelho, 324' books.txt
+
+echo -e "------------------转换命令 y----------------------"
+# I V IV XX
+echo "1 5 15 20" | sed 'y/151520/IVXVXX/'
+
+echo -e "------------------输出隐藏字符命令 l----------------------"
+sed 's/ /\t/g' books.txt > junk.txt
+sed -n 'l' junk.txt
+# 本按照指定的宽度换行
+sed -n 'l 25' books.txt
